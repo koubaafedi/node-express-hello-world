@@ -1,20 +1,19 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
+        stage('Terraform Init') {
             steps {
-                echo 'Building..'
+                sh 'terraform init'
             }
         }
-        stage('Test') {
+        stage('Terraform Plan') {
             steps {
-                echo 'Testing..'
+                sh 'terraform plan'
             }
         }
-        stage('Deploy') {
+        stage('Terraform Apply') {
             steps {
-                echo 'Deploying....'
+                sh 'terraform apply -auto-approve'
             }
         }
     }
