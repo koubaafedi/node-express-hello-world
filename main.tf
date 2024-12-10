@@ -23,7 +23,14 @@ resource "azurerm_app_service" "app_service" {
   resource_group_name = azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_service_plan.app_service_plan.id
 
+  app_settings = {
+    WEBSITES_PORT = "3000"
+  }
+
   site_config {
     linux_fx_version = "PYTHON|3.9"
+    always_on = "true"
+
+
   }
 }
