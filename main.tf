@@ -1,11 +1,8 @@
-
 provider "azurerm" {
   features {}
   subscription_id = var.subscription_id
-  use_msi = true
+  use_msi         = true
 }
-
-
 
 resource "azurerm_resource_group" "rg" {
   name     = "jenkins-terraform-rg"
@@ -16,10 +13,8 @@ resource "azurerm_service_plan" "app_service_plan" {
   name                = "jenkins-terraform-asp"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  sku {
-    tier = "Basic"
-    size = "B1"
-  }
+  os_type             = "Linux"      # Specify the OS type
+  sku_name            = "B1"         # Basic tier, size B1
 }
 
 resource "azurerm_app_service" "app_service" {
